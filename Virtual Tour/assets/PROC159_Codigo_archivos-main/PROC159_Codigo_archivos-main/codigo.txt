@@ -1,0 +1,42 @@
+    showView: function () {
+      const { selectedCard } = this.data;
+  
+      //Establecer la imagen de 360 grados al elemento del cielo.
+      const skyEl = document.querySelector("#main-container");
+  
+      skyEl.setAttribute("material", {
+        src: `./assets/360_images/${selectedCard}/place-0.jpg`,
+        color: "white"
+      });
+    },
+----------------------------------------------------------------------------------
+    tick: function () {
+      const { state } = this.el.getAttribute("tour");
+  
+      if (state === "view") {
+        this.hideEl([this.placesContainer]);
+        this.showView();
+      }
+    },
+-------------------------------------------------------------------------------------
+      //Eventos 'click' del cursor.
+    this.el.addEventListener("click", evt => {
+      const placesContainer = document.querySelector("#places-container");
+      const { state } = placesContainer.getAttribute("tour");
+
+      if (state === "places-list") {
+        const id = this.el.getAttribute("id");
+        const placesId = [
+          "taj-mahal",
+          "budapest",
+          "new-york-city",
+          "eiffel-tower"
+        ];
+        if (placesId.includes(id)) {
+          placesContainer.setAttribute("tour", {
+            state: "view",
+            selectedCard: id
+          });
+        }
+      }
+    });
